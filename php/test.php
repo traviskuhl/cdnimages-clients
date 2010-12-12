@@ -13,7 +13,8 @@
 		"key"		=> $config['key'],
 		"secret"	=> $config['secret'],
 		"cname"		=> $config['cname'],
-		"api"		=> $config['api']
+		"api"		=> $config['api'],
+		"cmds"		=> $config['cmds']
 	));
 
 	echo "\nStarting Test...\n\n";

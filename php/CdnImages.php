@@ -3,7 +3,7 @@
 class CdnImages {
 	
 	// key and secret 
-	public static $key, $secret, $domain, $cname = false;
+	public static $key, $secret, $domain, $cname, $cmds = false;
 
 	// api
 	public static $api = "http://api.cdnimag.es";
@@ -50,6 +50,9 @@ class CdnImages {
 		// if cname is i we need to unshift to the first cmd
 		if ( self::$cname == 'i.cdnimag.es' ) { $cmds = array_merge(array(self::$dmain), $cmds); }
 		
+		// are there already cmds
+		if ( self::$cmds !== false ) { $cmds = array_merge(self::$cmds, $cmds); }
+		
 		// cmdStr
 		$cmdStr = implode("/",array_map(function($k=false, $v=false){ return ($k?"{$k}:{$v}":$v); }, array_keys($cmds), $cmds));
 		
@@ -79,6 +82,17 @@ class CdnImages {
 	/// @return string signed url
 	///////////////////////////////////////////////////
 	public static function signString($str) {
+	
+		// get the path of an image
+		$_getPath = function($str) {
+		
+			// if it doesn't have http we can skip
+			if ( substr($str,0,3) != "http" ) { return $str; }
+			
+			// parse it 
+			return parse_url($str, PHP_URL_PATH);
+			
+		};
 	
 		// get all image tasg
 		if ( preg_match_all("#<img([^>]+)>#i", $str, $matches, PREG_SET_ORDER) ) {
@@ -113,14 +127,13 @@ class CdnImages {
 			
 				// background-image or background
 				if ( preg_match("#background(\-image)?:\s?url\(([^\)]+)\)#", $tag, $m) ) {				
-				
 					// tag
-					$tag = str_replace($m[2], self::sign($m[2], $cmd), $tag);
+					$tag = str_replace($m[2], self::sign($_getPath($m[2]), $cmd), $tag);
 					
 				}			
 				// src
 				else if ( preg_match("#src=([^\s]+)#", $tag, $m) ) {
-					$tag = str_replace($m[0], 'src="'.self::sign(trim($m[1],"\"'"), $cmd).'"', $tag);
+					$tag = str_replace($m[0], 'src="'.self::sign($_getPath(trim($m[1],"\"'")), $cmd).'"', $tag);
 				}								
 				
 				// do it 
