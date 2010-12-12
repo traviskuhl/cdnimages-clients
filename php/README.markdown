@@ -12,16 +12,15 @@ REQUIREMENTS
 
 USAGE
 --------
-`
-// setup
-CdnImages::setup(array(
-	"domain"	=> $config['domain'],
-	"key"		=> $config['key'],
-	"secret"	=> $config['secret'],
-	"cname"		=> $config['cname'],
-	"api"		=> $config['api']
-));
-`
+	// setup
+	CdnImages::setup(array(
+		"domain"	=> $config['domain'],
+		"key"		=> $config['key'],
+		"secret"	=> $config['secret'],
+		"cname"		=> $config['cname'],
+		"api"		=> $config['api']
+	));
+
 
 LICENSE
 --------
