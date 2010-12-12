@@ -1,26 +1,26 @@
 cdnimag.es PHP Client
 =========
+A PHP wrapper client for the cdnimages API.
+
+See the full list of [API Client Methods][https://github.com/traviskuhl/cdnimages-clients]
+
 
 REQUIREMENTS
 --------
 * PHP 5.2 or greater
-* JSON Extension [http://us.php.net/manual/en/json.installation.php] 
+* [JSON Extension][http://us.php.net/manual/en/json.installation.php] 
 
 USAGE
 --------
 `
-<?php
-
-	// setup
-	CdnImages::setup(array(
-		"domain"	=> $config['domain'],
-		"key"		=> $config['key'],
-		"secret"	=> $config['secret'],
-		"cname"		=> $config['cname'],
-		"api"		=> $config['api']
-	));
-
-?>
+// setup
+CdnImages::setup(array(
+	"domain"	=> $config['domain'],
+	"key"		=> $config['key'],
+	"secret"	=> $config['secret'],
+	"cname"		=> $config['cname'],
+	"api"		=> $config['api']
+));
 `
 
 LICENSE
