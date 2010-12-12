@@ -4,12 +4,13 @@
 	// include our class
 	include("./CdnImages.php");
 
+	// load config
+	$config = json_decode(file_get_contents("../config.json"), true);
+
 	// set some vars
-	CdnImages::setup(array(
-	));
+	CdnImages::setup($config);
 
 	echo "\nStarting Test...\n\n";
-/*
 
 	// upload
 	echo " Upload an image:\n ";
@@ -19,7 +20,7 @@
 
 	// try to post
 	try {
-		echo CdnImages::post("./f3.jpg", "test/{$name}.jpg" );		
+		echo CdnImages::post("../images/test.jpg", "test/{$name}.jpg" );		
 	}
 	catch (Exception $e) {  echo "ERROR!! ".$e->getMessage(); }
 	
@@ -28,11 +29,10 @@
 	echo " Signed Url:\n ";
 
 	// return
-	echo CdnImages::sign("/test/{$name}.jpg",array('test.cdnimag.es', 'size'=>"100x100"));
+	echo CdnImages::sign("/test/{$name}.jpg",array($config['domain'], 'size'=>"100x100"));
 	
 	echo "\n\n";
 	
-*/
 	// string
 	echo " Sign String:\n ";
 	
