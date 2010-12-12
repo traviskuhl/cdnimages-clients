@@ -8,7 +8,13 @@
 	$config = json_decode(file_get_contents("../config.json"), true);
 
 	// set some vars
-	CdnImages::setup($config);
+	CdnImages::setup(array(
+		"domain"	=> $config['domain'],
+		"key"		=> $config['key'],
+		"secret"	=> $config['secret'],
+		"cname"		=> $config['cname'],
+		"api"		=> $config['api']
+	));
 
 	echo "\nStarting Test...\n\n";
 
