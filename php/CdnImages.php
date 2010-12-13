@@ -6,7 +6,7 @@ class CdnImages {
 	public static $key, $secret, $domain, $cname, $cmds = false;
 
 	// api
-	public static $api = "http://api.cdnimag.es";
+	public static $api = "api.cdnimag.es";
 	
 	// version
 	public static $apiVersion = "v1";
@@ -275,8 +275,7 @@ class CdnImages {
 		$format = ( function_exists("json_decode") ? "text/javascript" : "application/php" );
 		
 		// accept header
-		$headers["Accept"] = $format;
-			
+		$headers["Accept"] = $format;		
 		
 		// create a new cURL resource
 		$ch = curl_init();
