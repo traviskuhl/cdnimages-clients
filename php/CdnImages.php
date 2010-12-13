@@ -27,10 +27,15 @@ class CdnImages {
 	
 		// set our args
 		foreach ( $args as $k => $v ) {	
-			if ( property_exists("CdnImages", $k) ) {
+			if ( property_exists("CdnImages", $k) AND $v !== false ) {
 				self::${$k} = $v;
 			}
 		}				
+
+		// no cname
+		if ( self::$cname === false ) {
+			self::$cname = "i.cdnimag.es";
+		}
 				
 	}
 
@@ -48,10 +53,10 @@ class CdnImages {
 		if ( self::$secret === false ) { return $path; }
 		
 		// if cname is i we need to unshift to the first cmd
-		if ( self::$cname == 'i.cdnimag.es' ) { $cmds = array_merge(array(self::$dmain), $cmds); }
+		if ( self::$cname == 'i.cdnimag.es' ) { $cmds = array_merge(array(self::$domain), $cmds); }
 		
 		// are there already cmds
-		if ( self::$cmds !== false ) { $cmds = array_merge(self::$cmds, $cmds); }
+		if ( self::$cmds !== false AND is_array(self::$cmds) ) { $cmds = array_merge(self::$cmds, $cmds); }
 		
 		// cmdStr
 		$cmdStr = implode("/",array_map(function($k=false, $v=false){ return ($k?"{$k}:{$v}":$v); }, array_keys($cmds), $cmds));

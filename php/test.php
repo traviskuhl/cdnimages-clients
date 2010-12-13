@@ -36,7 +36,7 @@
 	echo " Signed Url:\n ";
 
 	// return
-	echo CdnImages::sign($test,array($config['domain'], 'size'=>"100x100"));
+	echo CdnImages::sign($test,array('size'=>"100x100"));
 	
 	echo "\n\n";
 	
